@@ -1,4 +1,8 @@
+import Trending from "@/features/movies/Trending";
+import MostPopular from "@/features/movies/MostPopular";
 import Head from "next/head";
+
+const containerStyle = { width: "90%", margin: "auto" };
 
 export default function Home() {
   return (
@@ -9,7 +13,10 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main> Main content</main>
+      <main style={containerStyle}>
+        <Trending/>
+        <MostPopular/>
+      </main>
     </>
   );
 }

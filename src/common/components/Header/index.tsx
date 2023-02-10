@@ -9,7 +9,7 @@ import {
   Search,
   SearchIconWrapper,
   StyledInputBase,
-} from "./styled";
+} from "@/common/components/Header/styled";
 
 export default function SearchAppBar() {
   return (
