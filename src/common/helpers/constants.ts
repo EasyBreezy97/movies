@@ -1,3 +1,6 @@
+const YT_VIDEO_BASE_URL = "https://www.youtube.com/watch?v=";
+const VIMEO_VIDEO_BASE_URL = "https://vimeo.com/";
+
 export const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export const TOKEN = process.env.NEXT_PUBLIC_ACCESS_TOKEN;
 export const API_IMAGES_URL = process.env.NEXT_PUBLIC_API_IMAGES_URL;

@@ -1,9 +1,20 @@
-import React from 'react'
+import React from "react";
+import useMostPopular from "@/features/movies/MostPopular/hooks/useMostPopular";
+import Carousel from "@/common/components/Carousel";
 
 const MostPopular = () => {
-  return (
-    <div>MostPopular</div>
-  )
-}
+  const { data, isLoading, error } = useMostPopular();
 
-export default MostPopular
+  return (
+    <div>
+      <Carousel
+        data={data}
+        isLoading={isLoading}
+        error={error}
+        heading="Most Popular Movies"
+      />
+    </div>
+  );
+};
+
+export default MostPopular;
