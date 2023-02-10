@@ -14,7 +14,11 @@ const Carousel = ({ data, error, isLoading, heading }) => {
       {isLoading && <SkeletonGroup />}
       <Slider {...SLIDER_SETTINGS}>
         {data?.map((item) => (
-          <Slide key={item.id} title={item.title} poster={item.poster_path} />
+          <Slide
+            key={item.id}
+            title={item.title ?? item.name}
+            poster={item.poster_path}
+          />
         ))}
       </Slider>
     </div>

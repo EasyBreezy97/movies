@@ -1,5 +1,6 @@
-import Trending from "@/features/movies/Trending";
-import MostPopular from "@/features/movies/MostPopular";
+import TrendingMovies from "@/features/movies/Trending";
+import MostPopularMovies from "@/features/movies/MostPopular";
+import MostPopularTVShows from "@/features/tv-shows/MostPopular";
 import Head from "next/head";
 
 const containerStyle = { width: "90%", margin: "auto" };
@@ -14,8 +15,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main style={containerStyle}>
-        <Trending/>
-        <MostPopular/>
+        <TrendingMovies />
+        <MostPopularMovies />
+        <MostPopularTVShows />
       </main>
     </>
   );
