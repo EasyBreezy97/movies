@@ -2,14 +2,8 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import SearchIcon from "@mui/icons-material/Search";
-import {
-  NavBar,
-  Heading,
-  Search,
-  SearchIconWrapper,
-  StyledInputBase,
-} from "@/common/components/Header/styled";
+import { NavBar, Heading } from "@/common/components/Header/styled";
+import Search from "@/common/components/Search";
 
 export default function SearchAppBar() {
   return (
@@ -32,15 +26,7 @@ export default function SearchAppBar() {
           >
             Movies
           </Heading>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Movies & Shows..."
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
+          <Search />
         </Toolbar>
       </NavBar>
     </Box>

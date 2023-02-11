@@ -13,6 +13,5 @@ export default function useTrendingMovies(quantity = 10) {
     () => data?.results.slice(0, quantity),
     [data?.results, quantity],
   );
-  console.log({finalData});
   return { data:finalData, error, isLoading };
 }

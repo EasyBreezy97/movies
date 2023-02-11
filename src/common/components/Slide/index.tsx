@@ -7,7 +7,7 @@ import React, { FC } from "react";
 
 interface ISlide {
   title: string;
-  poster: string;
+  poster?: string;
 }
 
 export const Heading = styled(Typography)(() => ({
@@ -24,13 +24,15 @@ const Slide: FC<ISlide> = ({ title, poster }) => {
       <Heading alignContent="center" variant="overline">
         {title}
       </Heading>
-      <Image
-        width={248}
-        height={375}
-        src={API_IMAGES_URL + poster}
-        alt={poster}
-        style={{ margin: "auto" }}
-      />
+      {poster && (
+        <Image
+          width={248}
+          height={375}
+          src={API_IMAGES_URL + poster}
+          alt={poster}
+          style={{ margin: "auto" }}
+        />
+      )}
     </Container>
   );
 };

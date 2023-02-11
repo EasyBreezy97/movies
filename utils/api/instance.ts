@@ -12,8 +12,6 @@ const instance = axios.create({
 // Request interceptors for API calls
 instance.interceptors.request.use(
   (config) => {
-    console.log({TOKEN});
-
     config.headers["Authorization"] = `Bearer ${TOKEN}`;
     return config;
   },

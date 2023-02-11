@@ -2,6 +2,7 @@ import TrendingMovies from "@/features/movies/Trending";
 import MostPopularMovies from "@/features/movies/MostPopular";
 import MostPopularTVShows from "@/features/tv-shows/MostPopular";
 import Head from "next/head";
+import Genres from "@/features/movie-and-tv/Genres";
 
 const containerStyle = { width: "90%", margin: "auto" };
 
@@ -18,6 +19,7 @@ export default function Home() {
         <TrendingMovies />
         <MostPopularMovies />
         <MostPopularTVShows />
+        <Genres/>
       </main>
     </>
   );
