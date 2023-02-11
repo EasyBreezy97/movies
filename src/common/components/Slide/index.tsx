@@ -1,13 +1,17 @@
+import React, { FC } from "react";
 import { API_IMAGES_URL } from "@/common/helpers/constants";
 import { styled } from "@mui/material/styles";
 import { Typography } from "@mui/material";
 import Container from "@mui/material/Container";
+import IconButton from "@mui/material/IconButton";
+import ImageListItemBar from "@mui/material/ImageListItemBar";
+import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import Image from "next/image";
-import React, { FC } from "react";
 
 interface ISlide {
   title: string;
   poster?: string;
+  rating?: number;
 }
 
 export const Heading = styled(Typography)(() => ({
@@ -18,20 +22,35 @@ export const Heading = styled(Typography)(() => ({
   textOverflow: "ellipsis",
 }));
 
-const Slide: FC<ISlide> = ({ title, poster }) => {
+const Slide: FC<ISlide> = ({ title, poster, rating }) => {
   return (
     <Container sx={{ my: 3 }} maxWidth="sm">
       <Heading alignContent="center" variant="overline">
         {title}
       </Heading>
       {poster && (
-        <Image
-          width={248}
-          height={375}
-          src={API_IMAGES_URL + poster}
-          alt={poster}
-          style={{ margin: "auto" }}
-        />
+        <div style={{ position: "relative" }}>
+          <ImageListItemBar
+            position="bottom"
+            title={title}
+            subtitle={`Rating: ${rating}`}
+            actionIcon={
+              <IconButton
+                sx={{ color: "rgba(255, 255, 255, 0.54)" }}
+                aria-label={`info about ${title}`}
+              >
+                <PlayCircleIcon fontSize="large" color="primary" />
+              </IconButton>
+            }
+          />
+          <Image
+            width={248}
+            height={375}
+            src={API_IMAGES_URL + poster}
+            alt={poster}
+            style={{ margin: "auto" }}
+          ></Image>
+        </div>
       )}
     </Container>
   );
