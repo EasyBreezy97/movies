@@ -5,6 +5,8 @@ export const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export const TOKEN = process.env.NEXT_PUBLIC_ACCESS_TOKEN;
 export const API_IMAGES_URL = process.env.NEXT_PUBLIC_API_IMAGES_URL;
 
+export const DEBOUNCE_TIME=250
+
 export const SLIDER_SETTINGS = {
   dots: false,
   infinite: true,

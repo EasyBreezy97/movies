@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import { NavBar, Heading } from "@/common/components/Header/styled";
-import Search from "@/common/components/Search";
+import SearchBar from "@/features/movie-and-tv/SearchBar";
 
 export default function SearchAppBar() {
   return (
@@ -26,7 +26,7 @@ export default function SearchAppBar() {
           >
             Movies
           </Heading>
-          <Search />
+          <SearchBar />
         </Toolbar>
       </NavBar>
     </Box>

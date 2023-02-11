@@ -8,12 +8,12 @@ export default function useGenres() {
     data: movieGenre,
     error: movieGenreError,
     isLoading: movieGenreIsLoading,
-  } = useSWR(`${API_URL}/genre/movie/list`, fetcher);
+  } = useSWR(`${API_URL}genre/movie/list`, fetcher);
   const {
     data: tvGenre,
     error: tvGenreError,
     isLoading: tvGenreIsLoading,
-  } = useSWR(`${API_URL}/genre/tv/list`, fetcher);
+  } = useSWR(`${API_URL}genre/tv/list`, fetcher);
 
   let finalData;
   let errorMsg: string | undefined;

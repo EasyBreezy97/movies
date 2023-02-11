@@ -1,5 +1,4 @@
 import "@/styles/globals.css";
-import useSWR, { SWRConfig } from "swr";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "utils/theme";
 import createEmotionCache from "utils/createEmotionCache";
@@ -8,6 +7,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import type { AppProps } from "next/app";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Layout from "@/common/components/Layout";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -21,7 +21,9 @@ export default function App(props: IApp) {
     <CacheProvider value={emotionCache}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </ThemeProvider>
     </CacheProvider>
   );

@@ -5,7 +5,7 @@ import fetcher from "@/common/helpers/fetcher";
 
 export default function useMostPopular(quantity = 20) {
   const { data, error, isLoading } = useSWR(
-    `${API_URL}/movie/popular`,
+    `${API_URL}movie/popular`,
     fetcher,
   );
 
