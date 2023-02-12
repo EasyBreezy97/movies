@@ -18,9 +18,40 @@ const Details = () => {
     error: tvError,
     isLoading: tvLoading,
   } = useTVShowDetails(resourceId, shouldFetchTV);
+
+  const finalData = tvData || movieData;
+
+  const productionCompanies = finalData?.production_companies
+    ?.map((item) => item.name)
+    .join(",");
+
+  const productionCountries = finalData?.production_countries
+    ?.map((item) => item.name)
+    ?.join(",");
+
+  const genres = finalData?.genres?.map((item) => item.name)?.join(",");
+
+  const langs = finalData?.languages?.join(" ");
+
   return (
     <div>
-      <DetailsGrid />
+      <DetailsGrid
+        title={finalData?.name}
+        posterURL={finalData?.poster_path}
+        isAdultMovie={finalData?.adult}
+        tagLine={finalData?.tagline}
+        originalLang={finalData?.original_language}
+        popularity={finalData?.popularity}
+        status={finalData?.status}
+        votes={finalData?.vote_count}
+        votesAvg={finalData?.vote_average}
+        description={finalData?.overview}
+        productionCompanies={productionCompanies}
+        productionCountries={productionCountries}
+        genres={genres}
+        languages={langs}
+        homePageURL={finalData?.homepage}
+      />
     </div>
   );
 };

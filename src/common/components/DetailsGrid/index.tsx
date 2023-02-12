@@ -1,14 +1,14 @@
+import { FC } from "react";
 import { styled } from "@mui/material/styles";
 import Image from "next/image";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
 import Typography from "@mui/material/Typography";
 import { API_IMAGES_URL } from "@/common/helpers/constants";
 import plus18Img from "@/common/assets/Plus_18.webp";
+import { Link } from "@mui/material";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -18,67 +18,151 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
+interface IDetailsGrid {
+  posterURL: string;
+  isAdultMovie: boolean;
+  tagLine: string;
+  originalLang: string;
+  popularity: string;
+  status: string;
+  votes: string;
+  votesAvg: string;
+  title: string;
+  description: string;
+  productionCompanies: string;
+  productionCountries: string;
+  genres: string;
+  languages: string;
+  homePageURL: string;
+}
 
-export default function DetailsGrid() {
+const DetailsGrid: FC<IDetailsGrid> = ({
+  title,
+  posterURL,
+  isAdultMovie,
+  tagLine,
+  originalLang,
+  popularity,
+  status,
+  votes,
+  votesAvg,
+  description,
+  productionCompanies,
+  productionCountries,
+  genres,
+  languages,
+  homePageURL,
+}) => {
   return (
-    <Container maxWidth={false} sx={{ mt: 4 }}>
+    <Container  sx={{ mt: 4 }}>
+      {title && (
+        <Typography sx={{ m: 1 }} variant="h4">
+          {title}
+        </Typography>
+      )}
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
-          <Grid item md={2} xs={12}>
+          <Grid item md={3} xs={12}>
             <Item>
-              <Grid style={{ position: "relative" }}>
+              <Grid
+                style={{
+                  position: "relative",
+                  display: "grid",
+                  placeItems: "center",
+                }}
+              >
                 <Image
-                  width={204}
-                  height={308}
-                  src={API_IMAGES_URL + "/sv1xJUazXeYqALzczSZ3O6nkH75.jpg"}
+                  style={{ maxWidth: "100%", objectFit: "cover" }}
+                  width={306}
+                  height={462}
+                  src={API_IMAGES_URL + posterURL}
                   alt="poster"
                 />
-                <Image
-                  style={{ position: "absolute", top: "0", right: "0" }}
-                  src={plus18Img}
-                  width={36}
-                  height={36}
-                  alt="18"
-                />
-                <List>
-                  <ListItem>Tagline: </ListItem>
-                  <ListItem>Original Lang: </ListItem>
-                  <ListItem>Popularity: </ListItem>
-                  <ListItem>Staus: </ListItem>
-                  <ListItem>Votes: </ListItem>
-                  <ListItem>Votes avg: </ListItem>
-                </List>
+                {isAdultMovie && (
+                  <Image
+                    style={{
+                      position: "absolute",
+                      top: "-25px",
+                      right: "-5px",
+                    }}
+                    src={plus18Img}
+                    width={54}
+                    height={54}
+                    alt="for adults"
+                  />
+                )}
+                {tagLine && (
+                  <Typography variant="overline">
+                    Tagline: {tagLine}{" "}
+                  </Typography>
+                )}
+                {originalLang && (
+                  <Typography variant="overline">
+                    Original Lang: {originalLang}{" "}
+                  </Typography>
+                )}
+                {popularity && (
+                  <Typography variant="overline">
+                    Popularity:{popularity}{" "}
+                  </Typography>
+                )}
+                {status && (
+                  <Typography variant="overline">Staus: {status} </Typography>
+                )}
+                {votes && (
+                  <Typography variant="overline">Votes: {votes}</Typography>
+                )}
+                {votesAvg && (
+                  <Typography variant="overline">
+                    Votes avg: {votesAvg}{" "}
+                  </Typography>
+                )}
               </Grid>
             </Item>
           </Grid>
-          <Grid item md={10} xs={12}>
+          <Grid item md={9} xs={12}>
             <Item>
-              <Typography sx={{ m: 1 }} variant="h4">
-                {"SOME title"}
-              </Typography>{" "}
-              <Typography sx={{ m: 1 }} variant="body1">
-                {"Movie or tv desc"}
-              </Typography>{" "}
-              <Typography sx={{ m: 1 }} variant="body1">
-                {"Production companies: "}
-              </Typography>{" "}
-              <Typography sx={{ m: 1 }} variant="body1">
-                {"Production countries: "}
-              </Typography>{" "}
-              <Typography sx={{ m: 1 }} variant="body1">
-                {"Genres:"}
-              </Typography>{" "}
-              <Typography sx={{ m: 1 }} variant="body1">
-                {"Languages:"}
-              </Typography>{" "}
-              <Typography sx={{ m: 1 }} variant="body1">
-                {"Home Page:"}
-              </Typography>{" "}
-
+              <div>
+                <Typography sx={{ m: 1 }} variant="overline">
+                  {"Description"}
+                </Typography>{" "}
+                <Typography sx={{ m: 1 }} variant="body1">
+                  {description}
+                </Typography>{" "}
+              </div>
+              {productionCompanies && (
+                <Typography sx={{ m: 1 }} variant="body1">
+                  Production companies: {productionCompanies}
+                </Typography>
+              )}
+              {productionCountries && (
+                <Typography sx={{ m: 1 }} variant="body1">
+                  Production countries: {productionCountries}
+                </Typography>
+              )}
+              {genres && (
+                <Typography sx={{ m: 1 }} variant="body1">
+                  Genres: {genres}
+                </Typography>
+              )}
+              {languages && (
+                <Typography sx={{ m: 1 }} variant="body1">
+                  Languages: {languages}
+                </Typography>
+              )}
+              {homePageURL && (
+                <Typography sx={{ m: 1 }} variant="body1">
+                  Home page URL:{" "}
+                  <Link href={homePageURL} target="_blanck">
+                    {homePageURL}
+                  </Link>
+                </Typography>
+              )}
             </Item>
           </Grid>
         </Grid>
       </Box>
     </Container>
   );
-}
+};
+export default DetailsGrid;
