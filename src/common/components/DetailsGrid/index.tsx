@@ -4,7 +4,6 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
-import Badge from "@mui/material/Badge";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Typography from "@mui/material/Typography";
@@ -19,10 +18,6 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-const Plus18 = styled(Badge)(({ theme }) => ({
-  width: "50px",
-  height: "50px",
-}));
 
 export default function DetailsGrid() {
   return (
