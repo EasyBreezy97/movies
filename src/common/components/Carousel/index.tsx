@@ -1,13 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
 import Slider from "react-slick";
 import Typography from "@mui/material/Typography";
 import { SLIDER_SETTINGS } from "@/common/helpers/constants";
 import Slide from "@/common/components/Slide";
 import SkeletonGroup from "@/common/components/SkeletonGroup";
 import { roundOnTwoDigits } from "@/common/helpers/utils";
-
+import useTrailer from "@/features/movies/Trending/hooks/useTrailer";
+import AppContext from "@/common/contexts/AppContext";
 
 const Carousel = ({ data, error, isLoading, heading }) => {
+  const { setShowPlayer } = useContext(AppContext);
+
+  const {
+    data: trailer,
+    error: trailerError,
+    isLoading: trailerIsLoading,
+    setMovieId,
+  } = useTrailer();
+
+  const onPlayVideo = (item) => {
+    setMovieId(item.id);
+    setShowPlayer(true);
+  };
   return (
     <div>
       <Typography sx={{ m: 1 }} variant="h4">
@@ -21,6 +35,8 @@ const Carousel = ({ data, error, isLoading, heading }) => {
             title={item.title ?? item.name}
             poster={item.poster_path}
             rating={roundOnTwoDigits(item.vote_average)}
+            onPlayVideo={() => onPlayVideo(item)}
+            disablePlayIcon={trailerIsLoading}
           />
         ))}
       </Slider>
