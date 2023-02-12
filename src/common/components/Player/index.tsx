@@ -5,11 +5,13 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import AppContext from "@/common/contexts/AppContext";
 import { YT_VIDEO_BASE_URL } from "@/common/helpers/constants";
+import useTrailerURL from "@/common/hooks/useTrailerURL";
 
 interface IPlayer {}
 
 const Player: FC<IPlayer> = () => {
   const { showPlayer, setShowPlayer, setUrl, url } = useContext(AppContext);
+  const TRAILER_URL = useTrailerURL(url);
 
   const handleClose = () => {
     setShowPlayer(false);
@@ -20,7 +22,7 @@ const Player: FC<IPlayer> = () => {
       <DialogContent>
         <DialogContentText>
           <div>
-            <ReactPlayer url={YT_VIDEO_BASE_URL + url} />
+            <ReactPlayer url={TRAILER_URL} />
           </div>
         </DialogContentText>
       </DialogContent>

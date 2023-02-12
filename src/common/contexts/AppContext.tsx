@@ -5,8 +5,10 @@ interface IProps {
 }
 interface IAppContext {
   url: string;
+  videoProvider: string;
   showPlayer: boolean;
   setUrl: React.Dispatch<React.SetStateAction<string>>;
+  setVideoProvider: React.Dispatch<React.SetStateAction<string>>;
   setShowPlayer: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -14,10 +16,20 @@ const AppContext = createContext<IAppContext | null>(null);
 
 export const AppContextProvider = ({ children }: IProps) => {
   const [url, setUrl] = useState("");
+  const [videoProvider, setVideoProvider] = useState("");
   const [showPlayer, setShowPlayer] = useState(false);
 
   return (
-    <AppContext.Provider value={{ url, showPlayer, setUrl, setShowPlayer }}>
+    <AppContext.Provider
+      value={{
+        url,
+        showPlayer,
+        videoProvider,
+        setUrl,
+        setShowPlayer,
+        setVideoProvider,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );

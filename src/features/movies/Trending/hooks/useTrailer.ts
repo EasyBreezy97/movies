@@ -6,7 +6,7 @@ import AppContext from "@/common/contexts/AppContext";
 
 export default function useTrailer() {
   const [movieId, setMovieId] = useState(null);
-  const { setUrl } = useContext(AppContext);
+  const { setUrl, setVideoProvider } = useContext(AppContext);
 
   const { data, error, isLoading } = useSWR(
     movieId && `${API_URL}movie/${movieId}/videos`,
@@ -14,7 +14,10 @@ export default function useTrailer() {
   );
 
   const trailer = data?.results?.filter((item) => item.type === "Trailer")[0];
-  if (trailer) setUrl(trailer?.key)
+  if (trailer) {
+    setUrl(trailer?.key);
+    setVideoProvider(trailer?.site);
+  }
 
   return { data: trailer, error, isLoading, setMovieId };
 }
