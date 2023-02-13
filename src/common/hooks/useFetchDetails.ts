@@ -1,27 +1,16 @@
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import useResourceType from "./useResourceType";
 
 function useFetchResource() {
   const [shouldFetchMovies, setShouldFetchMovies] = useState(false);
   const [shouldFetchTV, setShouldFetchTV] = useState(false);
-  const [resourceId, setResourceId] = useState("");
 
-  const router = useRouter();
+  const { resourceType, resourceId } = useResourceType();
 
   useEffect(() => {
-    if (router?.query?.id) {
-      const [type, id] = (router.query.id as string).split("=");
-      console.log({ type, id });
-      setResourceId(id);
-
-      if (type === "movie" || type === "tv") {
-        if (type === "movie") setShouldFetchMovies(true);
-        if (type === "tv") setShouldFetchTV(true);
-      } else {
-        router.push("/");
-      }
-    }
-  }, [router]);
+    if (resourceType === "movie") setShouldFetchMovies(true);
+    if (resourceType === "tv") setShouldFetchTV(true);
+  }, [resourceId, resourceType]);
 
   return { shouldFetchMovies, shouldFetchTV, resourceId };
 }

@@ -5,21 +5,28 @@ import { SLIDER_SETTINGS } from "@/common/helpers/constants";
 import Slide from "@/common/components/Slide";
 import SkeletonGroup from "@/common/components/SkeletonGroup";
 import { roundOnTwoDigits } from "@/common/helpers/utils";
-import useTrailer from "@/features/movies/Trending/hooks/useTrailer";
+import useTrailer from "@/common/hooks/useTrailer";
 import AppContext from "@/common/contexts/AppContext";
 
-const Carousel = ({ data, error, isLoading, heading }) => {
+const Carousel = ({
+  data,
+  error,
+  isLoading,
+  heading,
+  hasPlayIcon = false,
+  type,
+}) => {
   const { setShowPlayer } = useContext(AppContext);
 
   const {
     data: trailer,
     error: trailerError,
     isLoading: trailerIsLoading,
-    setMovieId,
-  } = useTrailer();
+    setId,
+  } = useTrailer(type);
 
   const onPlayVideo = (item) => {
-    setMovieId(item.id);
+    setId(item.id);
     setShowPlayer(true);
   };
 
@@ -40,6 +47,7 @@ const Carousel = ({ data, error, isLoading, heading }) => {
             rating={roundOnTwoDigits(item.vote_average)}
             onPlayVideo={() => onPlayVideo(item)}
             disablePlayIcon={trailerIsLoading}
+            hasPlayIcon={hasPlayIcon}
           />
         ))}
       </Slider>

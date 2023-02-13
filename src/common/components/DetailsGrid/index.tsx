@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useContext } from "react";
 import { styled } from "@mui/material/styles";
 import Image from "next/image";
 import Box from "@mui/material/Box";
@@ -7,7 +7,9 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { API_IMAGES_URL } from "@/common/helpers/constants";
 import plus18Img from "@/common/assets/Plus_18.webp";
-import { Link } from "@mui/material";
+import { Button, Link } from "@mui/material";
+import useTrailer from "@/common/hooks/useTrailer";
+import AppContext from "@/common/contexts/AppContext";
 
 const CARDS_MIN_HEIGHT = 550;
 
@@ -50,6 +52,7 @@ interface IDetailsGrid {
   spokenLangs: string;
   originCountries: string;
   type: string;
+  onPlayTrailer: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 const DetailsGrid: FC<IDetailsGrid> = ({
@@ -83,6 +86,7 @@ const DetailsGrid: FC<IDetailsGrid> = ({
   spokenLangs,
   originCountries,
   type,
+  onPlayTrailer,
 }) => {
   return (
     <div>
@@ -266,6 +270,9 @@ const DetailsGrid: FC<IDetailsGrid> = ({
                   </Link>
                 </Typography>
               )}
+              <Button onClick={onPlayTrailer} sx={{ m: 1 }} variant="outlined">
+                Open trailer
+              </Button>
             </Item>
           </Grid>
         </Grid>

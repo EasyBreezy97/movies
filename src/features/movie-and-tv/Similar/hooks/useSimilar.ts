@@ -8,18 +8,17 @@ enum SearchableTypes {
   TV = "tv",
 }
 
-export default function useActors() {
-  const { resourceId, resourceType } = useResourceType();
+export default function useSimilar(id: string) {
+  const {resourceId, resourceType} = useResourceType()
 
   const { data, error, isLoading } = useSWR(
-    (resourceType === SearchableTypes.MOVIE ||
-      resourceType === SearchableTypes.TV) &&
-      `${API_URL}${resourceType}/${resourceId}/credits`,
+    (resourceType === SearchableTypes.MOVIE || resourceType === SearchableTypes.TV) &&
+      `${API_URL}${resourceType}/${resourceId}/similar`,
     fetcher,
   );
 
   return {
-    data: data?.cast,
+    data: data?.results,
     error,
     isLoading,
   };

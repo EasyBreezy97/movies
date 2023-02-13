@@ -29,7 +29,7 @@ const Slide: FC<ISlide> = ({
   title,
   poster,
   rating,
-  hasPlayIcon = false,
+  hasPlayIcon,
   onPlayVideo,
   disablePlayIcon,
 }) => {

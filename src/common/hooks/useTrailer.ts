@@ -4,12 +4,12 @@ import useSWR from "swr";
 import fetcher from "@/common/helpers/fetcher";
 import AppContext from "@/common/contexts/AppContext";
 
-export default function useTrailer() {
-  const [movieId, setMovieId] = useState(null);
+export default function useTrailer(show: string) {
+  const [id, setId] = useState(null);
   const { setUrl, setVideoProvider } = useContext(AppContext);
 
   const { data, error, isLoading } = useSWR(
-    movieId && `${API_URL}movie/${movieId}/videos`,
+    id && `${API_URL}${show}/${id}/videos`,
     fetcher,
   );
 
@@ -19,5 +19,5 @@ export default function useTrailer() {
     setVideoProvider(trailer?.site);
   }
 
-  return { data: trailer, error, isLoading, setMovieId };
+  return { data: trailer, error, isLoading, setId };
 }
