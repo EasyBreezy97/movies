@@ -1,8 +1,5 @@
 import { useContext } from "react";
 import DetailsGrid from "@/common/components/DetailsGrid";
-import useMovieDetails from "@/features/movies/hooks/useDetails";
-import useTVShowDetails from "@/features/tv-shows/hooks/useDetails";
-import useFetchDetails from "@/common/hooks/useFetchDetails";
 import { usdFormatter } from "@/common/helpers/usd-formatter";
 import Container from "@mui/material/Container";
 import useTrailer from "@/common/hooks/useTrailer";
@@ -12,28 +9,16 @@ import useResourceType from "@/common/hooks/useResourceType";
 import Reviews from "@/features/movie-and-tv/Reviews";
 import Actors from "@/features/movie-and-tv/Actors";
 import Similar from "@/features/movie-and-tv/Similar";
+import useDetails from "@/common/hooks/useDetails";
 
 const Details = () => {
   const { setShowPlayer } = useContext(AppContext);
 
-  const { shouldFetchMovies, shouldFetchTV, resourceId } = useFetchDetails();
-
   const { resourceType } = useResourceType();
 
-  const {
-    data: movieData,
-    error: movieError,
-    isLoading: movieLoading,
-  } = useMovieDetails(resourceId, shouldFetchMovies);
-  const {
-    data: tvData,
-    error: tvError,
-    isLoading: tvLoading,
-  } = useTVShowDetails(resourceId, shouldFetchTV);
+  const { data: finalData, error, isLoading } = useDetails();
 
   const { setId } = useTrailer(resourceType);
-
-  const finalData = tvData || movieData;
 
   const productionCompanies = finalData?.production_companies
     ?.map((item) => item.name)
