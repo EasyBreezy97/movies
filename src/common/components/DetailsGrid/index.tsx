@@ -34,6 +34,11 @@ interface IDetailsGrid {
   genres: string;
   languages: string;
   homePageURL: string;
+  budget: string;
+  releaseDate: string;
+  revenue: string;
+  runtime: number;
+  belongsToCollection: string;
 }
 
 const DetailsGrid: FC<IDetailsGrid> = ({
@@ -52,9 +57,14 @@ const DetailsGrid: FC<IDetailsGrid> = ({
   genres,
   languages,
   homePageURL,
+  budget,
+  releaseDate,
+  revenue,
+  runtime,
+  belongsToCollection,
 }) => {
   return (
-    <Container  sx={{ mt: 4 }}>
+    <Container sx={{ mt: 4 }}>
       {title && (
         <Typography sx={{ m: 1 }} variant="h4">
           {title}
@@ -63,7 +73,7 @@ const DetailsGrid: FC<IDetailsGrid> = ({
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <Grid item md={3} xs={12}>
-            <Item>
+            <Item sx={{ minHeight: 460 }}>
               <Grid
                 style={{
                   position: "relative",
@@ -73,8 +83,8 @@ const DetailsGrid: FC<IDetailsGrid> = ({
               >
                 <Image
                   style={{ maxWidth: "100%", objectFit: "cover" }}
-                  width={306}
-                  height={462}
+                  width={300}
+                  height={350}
                   src={API_IMAGES_URL + posterURL}
                   alt="poster"
                 />
@@ -91,11 +101,7 @@ const DetailsGrid: FC<IDetailsGrid> = ({
                     alt="for adults"
                   />
                 )}
-                {tagLine && (
-                  <Typography variant="overline">
-                    Tagline: {tagLine}{" "}
-                  </Typography>
-                )}
+
                 {originalLang && (
                   <Typography variant="overline">
                     Original Lang: {originalLang}{" "}
@@ -103,25 +109,22 @@ const DetailsGrid: FC<IDetailsGrid> = ({
                 )}
                 {popularity && (
                   <Typography variant="overline">
-                    Popularity:{popularity}{" "}
+                    Popularity:{popularity}
                   </Typography>
                 )}
                 {status && (
                   <Typography variant="overline">Staus: {status} </Typography>
                 )}
-                {votes && (
-                  <Typography variant="overline">Votes: {votes}</Typography>
-                )}
-                {votesAvg && (
-                  <Typography variant="overline">
-                    Votes avg: {votesAvg}{" "}
-                  </Typography>
-                )}
               </Grid>
             </Item>
           </Grid>
           <Grid item md={9} xs={12}>
-            <Item>
+            <Item sx={{ minHeight: 460 }}>
+              {tagLine && (
+                <Typography sx={{ m: 1 }} variant="overline">
+                  Tagline: {tagLine}{" "}
+                </Typography>
+              )}
               <div>
                 <Typography sx={{ m: 1 }} variant="overline">
                   {"Description"}
@@ -140,14 +143,41 @@ const DetailsGrid: FC<IDetailsGrid> = ({
                   Production countries: {productionCountries}
                 </Typography>
               )}
+              {runtime && (
+                <Typography sx={{ m: 1 }} variant="body1">
+                  Runtime: {runtime}m
+                </Typography>
+              )}
               {genres && (
                 <Typography sx={{ m: 1 }} variant="body1">
                   Genres: {genres}
                 </Typography>
               )}
+              {budget && (
+                <Typography sx={{ m: 1 }} variant="body1">
+                  Budget: {budget}
+                </Typography>
+              )}
               {languages && (
                 <Typography sx={{ m: 1 }} variant="body1">
                   Languages: {languages}
+                </Typography>
+              )}
+              {revenue && (
+                <Typography sx={{ m: 1 }}>Revenue: {revenue}</Typography>
+              )}
+              {releaseDate && (
+                <Typography sx={{ m: 1 }}>
+                  Release date: {releaseDate}
+                </Typography>
+              )}
+              {votes && <Typography sx={{ m: 1 }}>Votes: {votes}</Typography>}
+              {votesAvg && (
+                <Typography sx={{ m: 1 }}>Votes avg: {votesAvg}</Typography>
+              )}
+              {belongsToCollection && (
+                <Typography sx={{ m: 1 }}>
+                  Belongs to collection: {belongsToCollection}
                 </Typography>
               )}
               {homePageURL && (

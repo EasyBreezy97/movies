@@ -20,10 +20,6 @@ function useFetchResource() {
       } else {
         router.push("/");
       }
-
-      console.log("type", type);
-
-      // if(type!=="movie" || type !=="tv") router.push("/")
     }
   }, [router]);
 

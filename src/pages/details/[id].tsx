@@ -4,6 +4,7 @@ import useMovieDetails from "@/features/movies/hooks/useDetails";
 import useTVShowDetails from "@/features/tv-shows/hooks/useDetails";
 import React, { useState } from "react";
 import useFetchDetails from "@/common/hooks/useFetchDetails";
+import { usdFormatter } from "@/common/helpers/usd-formatter";
 
 const Details = () => {
   const { shouldFetchMovies, shouldFetchTV, resourceId } = useFetchDetails();
@@ -32,11 +33,13 @@ const Details = () => {
   const genres = finalData?.genres?.map((item) => item.name)?.join(",");
 
   const langs = finalData?.languages?.join(" ");
+  const budget = usdFormatter.format(finalData?.budget);
+  const revenue = usdFormatter.format(finalData?.revenue);
 
   return (
     <div>
       <DetailsGrid
-        title={finalData?.name}
+        title={finalData?.name || finalData?.original_title}
         posterURL={finalData?.poster_path}
         isAdultMovie={finalData?.adult}
         tagLine={finalData?.tagline}
@@ -51,6 +54,11 @@ const Details = () => {
         genres={genres}
         languages={langs}
         homePageURL={finalData?.homepage}
+        budget={budget}
+        revenue={revenue}
+        releaseDate={finalData?.release_date}
+        runtime={finalData?.runtime}
+        belongsToCollection={finalData?.belongs_to_collection?.name}
       />
     </div>
   );
