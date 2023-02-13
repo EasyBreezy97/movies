@@ -30,11 +30,16 @@ const Details = () => {
     ?.map((item) => item.name)
     ?.join(",");
 
-  const genres = finalData?.genres?.map((item) => item.name)?.join(",");
+  const genres = finalData?.genres?.map((item) => item.name)?.join(" , ");
 
-  const langs = finalData?.languages?.join(" ");
+  const langs = finalData?.languages?.join(" , ");
   const budget = finalData?.budget && usdFormatter.format(finalData?.budget);
   const revenue = finalData?.revenue && usdFormatter.format(finalData?.revenue);
+
+  const createdBy = finalData?.created_by?.map(item => item.name).join(" , ")
+  const networks =   finalData?.networks?.map(item => item.name).join(" , ")
+
+  const spokenLangs = finalData?.spoken_languages?.map(item => item.english_name).join(" , ")
 
   return (
     <div>
@@ -59,6 +64,16 @@ const Details = () => {
         releaseDate={finalData?.release_date}
         runtime={finalData?.runtime}
         belongsToCollection={finalData?.belongs_to_collection?.name}
+        createdBy={createdBy}
+        firstAirDate={finalData?.first_air_date}
+        nextEpisodeToAir={finalData?.next_episode_to_air}
+        lastAirDate={finalData?.last_air_date}
+        numberOfSeasons={finalData?.number_of_seasons}
+        numberOfEpisodes={finalData?.number_of_episodes}
+        networks={networks}
+        spokenLangs={spokenLangs}
+        originCountries={finalData?.origin_country?.join(" , ")}
+        type={finalData?.type}
       />
     </div>
   );

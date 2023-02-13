@@ -10,6 +10,8 @@ import { API_IMAGES_URL } from "@/common/helpers/constants";
 import plus18Img from "@/common/assets/Plus_18.webp";
 import { Link } from "@mui/material";
 
+const CARDS_MIN_HEIGHT = 550;
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -25,8 +27,8 @@ interface IDetailsGrid {
   originalLang: string;
   popularity: string;
   status: string;
-  votes: string;
-  votesAvg: string;
+  votes: number;
+  votesAvg: number;
   title: string;
   description: string;
   productionCompanies: string;
@@ -39,6 +41,16 @@ interface IDetailsGrid {
   revenue: string;
   runtime: number;
   belongsToCollection: string;
+  createdBy: string;
+  firstAirDate: string;
+  nextEpisodeToAir: string;
+  lastAirDate: string;
+  networks: string;
+  numberOfSeasons: number;
+  numberOfEpisodes: number;
+  spokenLangs: string;
+  originCountries: string;
+  type: string;
 }
 
 const DetailsGrid: FC<IDetailsGrid> = ({
@@ -62,6 +74,16 @@ const DetailsGrid: FC<IDetailsGrid> = ({
   revenue,
   runtime,
   belongsToCollection,
+  createdBy,
+  firstAirDate,
+  nextEpisodeToAir,
+  lastAirDate,
+  networks,
+  numberOfSeasons,
+  numberOfEpisodes,
+  spokenLangs,
+  originCountries,
+  type,
 }) => {
   return (
     <Container sx={{ mt: 4 }}>
@@ -73,7 +95,7 @@ const DetailsGrid: FC<IDetailsGrid> = ({
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <Grid item md={3} xs={12}>
-            <Item sx={{ minHeight: 460 }}>
+            <Item sx={{ minHeight: CARDS_MIN_HEIGHT }}>
               <Grid
                 style={{
                   position: "relative",
@@ -82,9 +104,13 @@ const DetailsGrid: FC<IDetailsGrid> = ({
                 }}
               >
                 <Image
-                  style={{ maxWidth: "100%", objectFit: "cover" }}
+                  style={{
+                    maxWidth: "100%",
+                    objectFit: "cover",
+                    marginBottom: "15px",
+                  }}
                   width={300}
-                  height={350}
+                  height={390}
                   src={API_IMAGES_URL + posterURL}
                   alt="poster"
                 />
@@ -101,7 +127,6 @@ const DetailsGrid: FC<IDetailsGrid> = ({
                     alt="for adults"
                   />
                 )}
-
                 {originalLang && (
                   <Typography variant="overline">
                     Original Lang: {originalLang}{" "}
@@ -115,11 +140,16 @@ const DetailsGrid: FC<IDetailsGrid> = ({
                 {status && (
                   <Typography variant="overline">Staus: {status} </Typography>
                 )}
+                {votesAvg ? (
+                  <Typography variant="overline">
+                    Votes avg: {votesAvg}
+                  </Typography>
+                ) : null}
               </Grid>
             </Item>
           </Grid>
           <Grid item md={9} xs={12}>
-            <Item sx={{ minHeight: 460 }}>
+            <Item sx={{ minHeight: CARDS_MIN_HEIGHT }}>
               {tagLine && (
                 <Typography sx={{ m: 1 }} variant="overline">
                   Tagline: {tagLine}{" "}
@@ -143,19 +173,57 @@ const DetailsGrid: FC<IDetailsGrid> = ({
                   Production countries: {productionCountries}
                 </Typography>
               )}
-              {runtime && (
+              {createdBy && (
+                <Typography sx={{ m: 1 }} variant="body1">
+                  Created By: {createdBy}
+                </Typography>
+              )}
+              {runtime ? (
                 <Typography sx={{ m: 1 }} variant="body1">
                   Runtime: {runtime}m
                 </Typography>
-              )}
+              ) : null}
               {genres && (
                 <Typography sx={{ m: 1 }} variant="body1">
                   Genres: {genres}
                 </Typography>
               )}
-              {budget && (
+              {budget ? (
                 <Typography sx={{ m: 1 }} variant="body1">
                   Budget: {budget}
+                </Typography>
+              ) : null}
+              {revenue ? (
+                <Typography sx={{ m: 1 }}>Revenue: {revenue}</Typography>
+              ) : null}
+              {firstAirDate && (
+                <Typography sx={{ m: 1 }} variant="body1">
+                  First epoisode air date: {firstAirDate}
+                </Typography>
+              )}
+              {nextEpisodeToAir && (
+                <Typography sx={{ m: 1 }} variant="body1">
+                  Next epoisode air date: {nextEpisodeToAir}
+                </Typography>
+              )}
+              {lastAirDate && (
+                <Typography sx={{ m: 1 }} variant="body1">
+                  Last epoisode air date: {lastAirDate}
+                </Typography>
+              )}
+              {numberOfEpisodes ? (
+                <Typography sx={{ m: 1 }} variant="body1">
+                  Number of episodes: {numberOfEpisodes}
+                </Typography>
+              ) : null}
+              {numberOfSeasons ? (
+                <Typography sx={{ m: 1 }} variant="body1">
+                  Number of seasons: {numberOfSeasons}
+                </Typography>
+              ) : null}
+              {networks && (
+                <Typography sx={{ m: 1 }} variant="body1">
+                  Network(s): {networks}
                 </Typography>
               )}
               {languages && (
@@ -163,23 +231,34 @@ const DetailsGrid: FC<IDetailsGrid> = ({
                   Languages: {languages}
                 </Typography>
               )}
-              {revenue && (
-                <Typography sx={{ m: 1 }}>Revenue: {revenue}</Typography>
+              {spokenLangs && (
+                <Typography sx={{ m: 1 }} variant="body1">
+                  Spoken language(s): {spokenLangs}
+                </Typography>
               )}
+              {originCountries && (
+                <Typography sx={{ m: 1 }} variant="body1">
+                  Origin countries: {originCountries}
+                </Typography>
+              )}
+
               {releaseDate && (
                 <Typography sx={{ m: 1 }}>
                   Release date: {releaseDate}
                 </Typography>
               )}
-              {votes && <Typography sx={{ m: 1 }}>Votes: {votes}</Typography>}
-              {votesAvg && (
+              {votes ? (
+                <Typography sx={{ m: 1 }}>Votes: {votes}</Typography>
+              ) : null}
+              {votesAvg ? (
                 <Typography sx={{ m: 1 }}>Votes avg: {votesAvg}</Typography>
-              )}
+              ) : null}
               {belongsToCollection && (
                 <Typography sx={{ m: 1 }}>
                   Belongs to collection: {belongsToCollection}
                 </Typography>
               )}
+              {type && <Typography sx={{ m: 1 }}>Type: {type}</Typography>}
               {homePageURL && (
                 <Typography sx={{ m: 1 }} variant="body1">
                   Home page URL:{" "}
