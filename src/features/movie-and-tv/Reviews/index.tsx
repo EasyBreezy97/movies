@@ -5,8 +5,8 @@ import Grid from "@mui/material/Grid";
 import Avatar from "@mui/material/Avatar";
 import useReviews from "./hooks/useReviews";
 import { Divider } from "@mui/material";
-import SkeletonGroup from "@/common/components/SkeletonGroup";
 import ErrorBox from "@/common/components/ErrorBox";
+import Alert from "@mui/material/Alert";
 
 interface IResult {
   author: string;
@@ -29,6 +29,9 @@ const Reviews = () => {
     <div>
       <div style={{ padding: 14 }}>
         <h1>Comments</h1>
+        {!reviewError && !reviews?.length && (
+          <Alert severity="warning">No comments</Alert>
+        )}
         {reviews?.results?.map((result: IResult) => (
           <Paper
             key={`${result?.author}_${result?.updated_at}`}
@@ -52,7 +55,7 @@ const Reviews = () => {
           </Paper>
         ))}
       </div>
-      {reviewError && <ErrorBox error={reviewError}/>}
+      {reviewError && <ErrorBox error={reviewError} />}
       {!reviewError && (
         <Pagination
           count={reviews?.total_pages}

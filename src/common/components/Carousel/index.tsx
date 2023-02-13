@@ -9,6 +9,8 @@ import AppContext from "@/common/contexts/AppContext";
 import { useRouter } from "next/router";
 import ErrorBox from "../ErrorBox";
 import { AxiosError } from "axios";
+import Alert from "@mui/material/Alert";
+import SkeletonGroup from "../SkeletonGroup";
 
 interface ICarouselItem {
   id: string;
@@ -72,7 +74,10 @@ const Carousel: FC<ICarousel> = ({
         {heading}
       </Typography>
       {error && <ErrorBox error={error} />}
-
+      {isLoading && <SkeletonGroup />}
+      {!error && !data?.length && !isLoading && (
+        <Alert severity="warning">No items</Alert>
+      )}
       <Slider {...sliderSettings}>
         {data?.map((item) => (
           <Slide

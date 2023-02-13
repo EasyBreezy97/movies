@@ -3,6 +3,7 @@ import Carousel from "@/common/components/Carousel";
 import useFetchDetails from "@/common/hooks/useFetchDetails";
 import useSimilar from "./hooks/useSimilar";
 import { ShowTypes } from "@/common/types";
+import Alert from "@mui/material/Alert";
 
 interface IItemType {
   type: ShowTypes;
