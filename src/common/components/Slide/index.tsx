@@ -16,6 +16,7 @@ interface ISlide {
   onPlayVideo?: MouseEventHandler<HTMLButtonElement> | undefined;
   onNavigateToItem?: MouseEventHandler<HTMLImageElement> | undefined;
   disablePlayIcon?: boolean;
+  type: "movie" | "tv" | "actor";
 }
 
 export const Heading = styled(Typography)(() => ({
@@ -32,9 +33,15 @@ const Slide: FC<ISlide> = ({
   rating,
   hasPlayIcon,
   disablePlayIcon,
+  type,
   onPlayVideo,
   onNavigateToItem,
 }) => {
+  const imageFooterStyle =
+    type !== "actor"
+      ? { "&:hover": { cursor: "pointer" } }
+      : { "&:hover": { cursor: "default" } };
+
   return (
     <Container sx={{ my: 3 }} maxWidth="sm">
       <Heading alignContent="center" variant="overline">
@@ -44,24 +51,20 @@ const Slide: FC<ISlide> = ({
         <div style={{ position: "relative" }}>
           <ImageListItemBar
             onClick={onNavigateToItem}
-            sx={{ "&:hover": { cursor: "pointer" } }}
+            sx={imageFooterStyle}
             position="bottom"
             title={title}
             subtitle={rating && `Rating: ${rating}`}
             actionIcon={
               hasPlayIcon && (
-                <IconButton
-                  sx={{ color: "rgba(255, 255, 255, 0.54)" }}
-                  aria-label={`info about ${title}`}
+                <Button
+                  onClick={onPlayVideo}
+                  variant="contained"
+                  disabled={disablePlayIcon}
+                  sx={{ fontSize: "10px" }}
                 >
-                  <Button
-                    color="primary"
-                    onClick={onPlayVideo}
-                    disabled={disablePlayIcon}
-                  >
-                    <PlayCircleIcon fontSize="large" color="primary" />
-                  </Button>
-                </IconButton>
+                  Trailer
+                </Button>
               )
             }
           />

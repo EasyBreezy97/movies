@@ -45,7 +45,6 @@ const SearchBar = () => {
       onChange={onShowSelect}
       isOptionEqualToValue={matcher}
       getOptionLabel={(option) => {
-        console.log(option);
         return `${option.title} - (Avg: ${option.vote_average})` || "";
       }}
       options={data || []}

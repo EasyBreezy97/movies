@@ -86,6 +86,7 @@ const Carousel: FC<ICarousel> = ({
             disablePlayIcon={trailerIsLoading}
             hasPlayIcon={hasPlayIcon}
             onNavigateToItem={() => onNavigateToItem(item)}
+            type={type}
           />
         ))}
       </Slider>

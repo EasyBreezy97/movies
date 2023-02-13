@@ -5,8 +5,6 @@ interface IErrorBox {
   error: AxiosError | Error | any;
 }
 const ErrorBox: FC<IErrorBox> = ({ error }) => {
-  console.log({error});
-
   return (
     <div>
       {error && (

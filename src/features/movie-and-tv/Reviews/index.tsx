@@ -13,8 +13,6 @@ const Reviews = () => {
     error: reviewError,
   } = useReviews();
 
-  console.log({ reviews });
-
   return (
     <div>
       <div style={{ padding: 14 }}>

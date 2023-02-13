@@ -94,7 +94,7 @@ const Details = () => {
       />
       <Actors />
       <Reviews />
-      <Similar />
+      <Similar type={resourceType} />
       <Player />
     </Container>
   );
