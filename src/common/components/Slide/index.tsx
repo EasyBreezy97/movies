@@ -3,9 +3,7 @@ import { API_IMAGES_URL } from "@/common/helpers/constants";
 import { styled } from "@mui/material/styles";
 import { Button, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
-import IconButton from "@mui/material/IconButton";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
-import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import Image from "next/image";
 
 interface ISlide {

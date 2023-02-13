@@ -56,7 +56,7 @@ const Carousel = ({ data, error, isLoading, heading }) => {
               },
             }}
           >
-            <Slide title={item.title ?? item.name}  />
+            <Slide title={item.title ?? item.name} />
           </Box>
         ))}
       </Slider>

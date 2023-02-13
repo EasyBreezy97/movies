@@ -1,4 +1,8 @@
+import { AxiosError } from "axios";
+
 export interface IDetailsGrid {
+  error:AxiosError;
+  isLoading:boolean;
   posterURL: string;
   isAdultMovie: boolean;
   tagLine: string;

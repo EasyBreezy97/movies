@@ -60,6 +60,8 @@ const Details = () => {
   return (
     <Container sx={{ mt: 4 }}>
       <DetailsGrid
+        error={error}
+        isLoading={isLoading}
         title={finalData?.name || finalData?.original_title}
         posterURL={finalData?.poster_path}
         isAdultMovie={finalData?.adult}

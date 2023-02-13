@@ -3,7 +3,6 @@ import Slider from "react-slick";
 import Typography from "@mui/material/Typography";
 import { SLIDER_SETTINGS } from "@/common/helpers/constants";
 import Slide from "@/common/components/Slide";
-import SkeletonGroup from "@/common/components/SkeletonGroup";
 import { roundOnTwoDigits } from "@/common/helpers/utils";
 import useTrailer from "@/common/hooks/useTrailer";
 import AppContext from "@/common/contexts/AppContext";
@@ -74,7 +73,6 @@ const Carousel: FC<ICarousel> = ({
       </Typography>
       {error && <ErrorBox error={error} />}
 
-      {isLoading && <SkeletonGroup />}
       <Slider {...sliderSettings}>
         {data?.map((item) => (
           <Slide

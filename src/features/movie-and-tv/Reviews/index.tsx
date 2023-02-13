@@ -6,6 +6,7 @@ import Avatar from "@mui/material/Avatar";
 import useReviews from "./hooks/useReviews";
 import { Divider } from "@mui/material";
 import SkeletonGroup from "@/common/components/SkeletonGroup";
+import ErrorBox from "@/common/components/ErrorBox";
 
 interface IResult {
   author: string;
@@ -51,13 +52,15 @@ const Reviews = () => {
           </Paper>
         ))}
       </div>
-      {reviewLoading && <SkeletonGroup />}
-      <Pagination
-        count={reviews?.total_pages}
-        variant="outlined"
-        color="primary"
-        onChange={onFetchNextPage}
-      />
+      {reviewError && <ErrorBox error={reviewError}/>}
+      {!reviewError && (
+        <Pagination
+          count={reviews?.total_pages}
+          variant="outlined"
+          color="primary"
+          onChange={onFetchNextPage}
+        />
+      )}
     </div>
   );
 };
