@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import useResourceType from "./useResourceType";
 
 function useFetchResource() {
-  const [shouldFetchMovies, setShouldFetchMovies] = useState(false);
-  const [shouldFetchTV, setShouldFetchTV] = useState(false);
+  const [shouldFetchMovies, setShouldFetchMovies] = useState<boolean>(false);
+  const [shouldFetchTV, setShouldFetchTV] = useState<boolean>(false);
 
   const { resourceType, resourceId } = useResourceType();
 

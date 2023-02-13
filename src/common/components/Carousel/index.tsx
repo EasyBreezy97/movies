@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { FC, MouseEvent, useContext } from "react";
 import Slider from "react-slick";
 import Typography from "@mui/material/Typography";
 import { SLIDER_SETTINGS } from "@/common/helpers/constants";
@@ -9,8 +9,27 @@ import useTrailer from "@/common/hooks/useTrailer";
 import AppContext from "@/common/contexts/AppContext";
 import { useRouter } from "next/router";
 import ErrorBox from "../ErrorBox";
+import { AxiosError } from "axios";
 
-const Carousel = ({
+interface ICarouselItem {
+  id: string;
+  title: string;
+  name: string | null;
+  poster_path: string | undefined;
+  profile_path: string | undefined;
+  vote_average: number;
+}
+interface ICarousel {
+  data: Array<ICarouselItem>;
+  error: AxiosError | Error | any;
+  isLoading: boolean;
+  heading: string;
+  slidesToShow?: number;
+  hasPlayIcon?: boolean;
+  type: "movie" | "tv" | "actor";
+}
+
+const Carousel: FC<ICarousel> = ({
   data,
   error,
   isLoading,
@@ -33,13 +52,13 @@ const Carousel = ({
     setId,
   } = useTrailer(type);
 
-  const onPlayVideo = (e, item) => {
+  const onPlayVideo = (e: MouseEvent<HTMLElement>, item: ICarouselItem) => {
     e.stopPropagation();
     setId(item.id);
     setShowPlayer(true);
   };
 
-  const onNavigateToItem = (item) => {
+  const onNavigateToItem = (item: ICarouselItem) => {
     if (type === "movie") {
       router.push(`/details/movie=${item.id}`);
     }

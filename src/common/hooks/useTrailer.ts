@@ -4,8 +4,12 @@ import useSWR from "swr";
 import fetcher from "@/common/helpers/fetcher";
 import AppContext from "@/common/contexts/AppContext";
 
+interface ITrailer {
+  type: string;
+}
+
 export default function useTrailer(show: string) {
-  const [id, setId] = useState(null);
+  const [id, setId] = useState<string | null>(null);
   const { setUrl, setVideoProvider } = useContext(AppContext);
 
   const { data, error, isLoading } = useSWR(
@@ -13,7 +17,9 @@ export default function useTrailer(show: string) {
     fetcher,
   );
 
-  const trailer = data?.results?.filter((item) => item.type === "Trailer")[0];
+  const trailer = data?.results?.filter(
+    (item: ITrailer) => item.type === "Trailer",
+  )[0];
   if (trailer) {
     setUrl(trailer?.key);
     setVideoProvider(trailer?.site);

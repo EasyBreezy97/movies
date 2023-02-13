@@ -2,11 +2,12 @@ import { useState } from "react";
 import useSWR from "swr";
 import { API_URL } from "@/common/helpers/constants";
 import fetcher from "@/common/helpers/fetcher";
+import { ShowTypes } from "@/common/types";
 
-enum SearchableTypes {
-  MOVIE = "movie",
-  TV = "tv",
+interface IItemType {
+  media_type: ShowTypes;
 }
+
 export default function useSearch(quantity = 20) {
   const [queryParams, setQueryParams] = useState("");
 
@@ -19,9 +20,9 @@ export default function useSearch(quantity = 20) {
   if (data?.results) {
     moviesAndTVShows = data.results
       ?.filter(
-        (item) =>
-          item.media_type === SearchableTypes.MOVIE ||
-          item.media_type === SearchableTypes.TV,
+        (item: IItemType) =>
+          item.media_type === ShowTypes.MOVIE ||
+          item.media_type === ShowTypes.TV,
       )
       .slice(0, quantity);
   }

@@ -20,25 +20,36 @@ const Details = () => {
 
   const { setId } = useTrailer(resourceType);
 
+  interface IDetailName {
+    name?: string;
+    english_name?: string;
+  }
+
   const productionCompanies = finalData?.production_companies
-    ?.map((item) => item.name)
+    ?.map((item: IDetailName) => item.name)
     .join(",");
 
   const productionCountries = finalData?.production_countries
-    ?.map((item) => item.name)
+    ?.map((item: IDetailName) => item.name)
     ?.join(",");
 
-  const genres = finalData?.genres?.map((item) => item.name)?.join(" , ");
+  const genres = finalData?.genres
+    ?.map((item: IDetailName) => item.name)
+    ?.join(" , ");
 
   const langs = finalData?.languages?.join(" , ");
   const budget = finalData?.budget && usdFormatter.format(finalData?.budget);
   const revenue = finalData?.revenue && usdFormatter.format(finalData?.revenue);
 
-  const createdBy = finalData?.created_by?.map((item) => item.name).join(" , ");
-  const networks = finalData?.networks?.map((item) => item.name).join(" , ");
+  const createdBy = finalData?.created_by
+    ?.map((item: IDetailName) => item.name)
+    .join(" , ");
+  const networks = finalData?.networks
+    ?.map((item: IDetailName) => item.name)
+    .join(" , ");
 
   const spokenLangs = finalData?.spoken_languages
-    ?.map((item) => item.english_name)
+    ?.map((item: IDetailName) => item.english_name)
     .join(" , ");
 
   const onPlayTrailer = () => {

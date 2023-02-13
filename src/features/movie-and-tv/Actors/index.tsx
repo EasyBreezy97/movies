@@ -12,6 +12,7 @@ const Actors = () => {
       error={castError}
       heading="Cast"
       slidesToShow={4}
+      type="actor"
     />
   );
 };

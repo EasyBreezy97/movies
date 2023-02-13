@@ -1,5 +1,5 @@
 import React, { FC, MouseEventHandler } from "react";
-import { API_IMAGES_URL, SLIDER_SETTINGS } from "@/common/helpers/constants";
+import { API_IMAGES_URL } from "@/common/helpers/constants";
 import { styled } from "@mui/material/styles";
 import { Button, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
@@ -7,7 +7,6 @@ import IconButton from "@mui/material/IconButton";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import Image from "next/image";
-import { cloneDeep } from "lodash";
 
 interface ISlide {
   title: string;

@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import TrendingMovies from "@/features/movies/Trending";
 import MostPopularMovies from "@/features/movies/MostPopular";
 import MostPopularTVShows from "@/features/tv-shows/MostPopular";

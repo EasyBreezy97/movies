@@ -1,4 +1,4 @@
-import { FC, useContext } from "react";
+import { FC } from "react";
 import { styled } from "@mui/material/styles";
 import Image from "next/image";
 import Box from "@mui/material/Box";
@@ -8,8 +8,7 @@ import Typography from "@mui/material/Typography";
 import { API_IMAGES_URL } from "@/common/helpers/constants";
 import plus18Img from "@/common/assets/Plus_18.webp";
 import { Button, Link } from "@mui/material";
-import useTrailer from "@/common/hooks/useTrailer";
-import AppContext from "@/common/contexts/AppContext";
+import { IDetailsGrid } from "./types";
 
 const CARDS_MIN_HEIGHT = 550;
 
@@ -17,43 +16,8 @@ const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
   padding: theme.spacing(1),
-  // textAlign: "center",
   color: theme.palette.text.secondary,
 }));
-
-interface IDetailsGrid {
-  posterURL: string;
-  isAdultMovie: boolean;
-  tagLine: string;
-  originalLang: string;
-  popularity: string;
-  status: string;
-  votes: number;
-  votesAvg: number;
-  title: string;
-  description: string;
-  productionCompanies: string;
-  productionCountries: string;
-  genres: string;
-  languages: string;
-  homePageURL: string;
-  budget: string;
-  releaseDate: string;
-  revenue: string;
-  runtime: number;
-  belongsToCollection: string;
-  createdBy: string;
-  firstAirDate: string;
-  nextEpisodeToAir: string;
-  lastAirDate: string;
-  networks: string;
-  numberOfSeasons: number;
-  numberOfEpisodes: number;
-  spokenLangs: string;
-  originCountries: string;
-  type: string;
-  onPlayTrailer: React.MouseEventHandler<HTMLButtonElement>;
-}
 
 const DetailsGrid: FC<IDetailsGrid> = ({
   title,

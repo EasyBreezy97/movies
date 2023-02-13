@@ -4,7 +4,6 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import AppContext from "@/common/contexts/AppContext";
-import { YT_VIDEO_BASE_URL } from "@/common/helpers/constants";
 import useTrailerURL from "@/common/hooks/useTrailerURL";
 
 interface IPlayer {}
