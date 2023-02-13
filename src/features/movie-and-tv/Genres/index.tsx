@@ -10,7 +10,6 @@ const Genres = () => {
       <Carousel
         data={data}
         isLoading={isLoading}
-        error={error}
         heading="Genres"
       />
       {error && <ErrorBox error={error} />}

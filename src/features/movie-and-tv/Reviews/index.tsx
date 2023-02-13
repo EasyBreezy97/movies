@@ -47,7 +47,7 @@ const Reviews = () => {
                 </h4>
                 <p style={{ textAlign: "left" }}>{result?.content}</p>
                 <p style={{ textAlign: "left", color: "gray" }}>
-                  {Date(result?.updated_at)}
+                  {Date.parse(result?.updated_at)}
                 </p>
               </Grid>
             </Grid>

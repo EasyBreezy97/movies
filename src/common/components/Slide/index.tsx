@@ -14,7 +14,7 @@ interface ISlide {
   onPlayVideo?: MouseEventHandler<HTMLButtonElement> | undefined;
   onNavigateToItem?: MouseEventHandler<HTMLImageElement> | undefined;
   disablePlayIcon?: boolean;
-  type: "movie" | "tv" | "actor";
+  type?: "movie" | "tv" | "actor";
 }
 
 export const Heading = styled(Typography)(() => ({

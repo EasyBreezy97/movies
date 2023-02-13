@@ -1,4 +1,4 @@
-import React from "react";
+import React,{FC} from "react";
 import Slider from "react-slick";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -36,8 +36,12 @@ settings.responsive = [
     },
   },
 ];
-
-const Carousel = ({ data, error, isLoading, heading }) => {
+interface ICarousel {
+  data:any;
+  isLoading:boolean
+  heading:string;
+}
+const Carousel:FC<ICarousel> = ({ data,  isLoading, heading }) => {
   return (
     <div>
       <Typography sx={{ m: 1 }} variant="h4">
@@ -45,7 +49,7 @@ const Carousel = ({ data, error, isLoading, heading }) => {
       </Typography>
       {isLoading && <SkeletonGroup />}
       <Slider {...settings}>
-        {data?.map((item) => (
+        {data?.map((item:any) => (
           <Box
             key={item.id}
             sx={{
