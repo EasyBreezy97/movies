@@ -13,10 +13,19 @@ function useFetchResource() {
       const [type, id] = (router.query.id as string).split("=");
       console.log({ type, id });
       setResourceId(id);
-      if (type === "movie") setShouldFetchMovies(true);
-      if (type === "tv") setShouldFetchTV(true);
+
+      if (type === "movie" || type === "tv") {
+        if (type === "movie") setShouldFetchMovies(true);
+        if (type === "tv") setShouldFetchTV(true);
+      } else {
+        router.push("/");
+      }
+
+      console.log("type", type);
+
+      // if(type!=="movie" || type !=="tv") router.push("/")
     }
-  }, [router.query]);
+  }, [router]);
 
   return { shouldFetchMovies, shouldFetchTV, resourceId };
 }
