@@ -5,6 +5,10 @@ import useTVShowDetails from "@/features/tv-shows/hooks/useDetails";
 import React, { useState } from "react";
 import useFetchDetails from "@/common/hooks/useFetchDetails";
 import { usdFormatter } from "@/common/helpers/usd-formatter";
+import useActors from "@/features/movie-and-tv/Actors/hooks/useActors";
+import Carousel from "@/common/components/Carousel";
+import Container from "@mui/material/Container";
+
 
 const Details = () => {
   const { shouldFetchMovies, shouldFetchTV, resourceId } = useFetchDetails();
@@ -19,6 +23,14 @@ const Details = () => {
     error: tvError,
     isLoading: tvLoading,
   } = useTVShowDetails(resourceId, shouldFetchTV);
+
+  const {
+    data: cast,
+    isLoading: castLoading,
+    error: castError,
+  } = useActors(resourceId);
+
+  console.log({ cast });
 
   const finalData = tvData || movieData;
 
@@ -36,13 +48,15 @@ const Details = () => {
   const budget = finalData?.budget && usdFormatter.format(finalData?.budget);
   const revenue = finalData?.revenue && usdFormatter.format(finalData?.revenue);
 
-  const createdBy = finalData?.created_by?.map(item => item.name).join(" , ")
-  const networks =   finalData?.networks?.map(item => item.name).join(" , ")
+  const createdBy = finalData?.created_by?.map((item) => item.name).join(" , ");
+  const networks = finalData?.networks?.map((item) => item.name).join(" , ");
 
-  const spokenLangs = finalData?.spoken_languages?.map(item => item.english_name).join(" , ")
+  const spokenLangs = finalData?.spoken_languages
+    ?.map((item) => item.english_name)
+    .join(" , ");
 
   return (
-    <div>
+    <Container sx={{ mt: 4 }}>
       <DetailsGrid
         title={finalData?.name || finalData?.original_title}
         posterURL={finalData?.poster_path}
@@ -75,7 +89,13 @@ const Details = () => {
         originCountries={finalData?.origin_country?.join(" , ")}
         type={finalData?.type}
       />
-    </div>
+      <Carousel
+        data={cast}
+        isLoading={castLoading}
+        error={castError}
+        heading="Cast"
+      />
+    </Container>
   );
 };
 

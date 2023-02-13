@@ -4,7 +4,6 @@ import Image from "next/image";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { API_IMAGES_URL } from "@/common/helpers/constants";
 import plus18Img from "@/common/assets/Plus_18.webp";
@@ -86,7 +85,7 @@ const DetailsGrid: FC<IDetailsGrid> = ({
   type,
 }) => {
   return (
-    <Container sx={{ mt: 4 }}>
+    <div>
       {title && (
         <Typography sx={{ m: 1 }} variant="h4">
           {title}
@@ -271,7 +270,7 @@ const DetailsGrid: FC<IDetailsGrid> = ({
           </Grid>
         </Grid>
       </Box>
-    </Container>
+    </div>
   );
 };
 export default DetailsGrid;

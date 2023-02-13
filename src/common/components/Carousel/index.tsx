@@ -22,6 +22,9 @@ const Carousel = ({ data, error, isLoading, heading }) => {
     setMovieId(item.id);
     setShowPlayer(true);
   };
+
+  if (!data) return;
+
   return (
     <div>
       <Typography sx={{ m: 1 }} variant="h4">
@@ -33,7 +36,7 @@ const Carousel = ({ data, error, isLoading, heading }) => {
           <Slide
             key={item.id}
             title={item.title ?? item.name}
-            poster={item.poster_path}
+            poster={item.poster_path ?? item.profile_path}
             rating={roundOnTwoDigits(item.vote_average)}
             onPlayVideo={() => onPlayVideo(item)}
             disablePlayIcon={trailerIsLoading}

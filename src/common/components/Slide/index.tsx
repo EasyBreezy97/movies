@@ -12,6 +12,7 @@ interface ISlide {
   title: string;
   poster?: string;
   rating?: number;
+  hasPlayIcon?: boolean;
   onPlayVideo?: MouseEventHandler<HTMLButtonElement> | undefined;
   disablePlayIcon?: boolean;
 }
@@ -28,6 +29,7 @@ const Slide: FC<ISlide> = ({
   title,
   poster,
   rating,
+  hasPlayIcon = false,
   onPlayVideo,
   disablePlayIcon,
 }) => {
@@ -41,20 +43,22 @@ const Slide: FC<ISlide> = ({
           <ImageListItemBar
             position="bottom"
             title={title}
-            subtitle={`Rating: ${rating}`}
+            subtitle={rating && `Rating: ${rating}`}
             actionIcon={
-              <IconButton
-                sx={{ color: "rgba(255, 255, 255, 0.54)" }}
-                aria-label={`info about ${title}`}
-              >
-                <Button
-                  color="primary"
-                  onClick={onPlayVideo}
-                  disabled={disablePlayIcon}
+              hasPlayIcon && (
+                <IconButton
+                  sx={{ color: "rgba(255, 255, 255, 0.54)" }}
+                  aria-label={`info about ${title}`}
                 >
-                  <PlayCircleIcon fontSize="large" color="primary" />
-                </Button>
-              </IconButton>
+                  <Button
+                    color="primary"
+                    onClick={onPlayVideo}
+                    disabled={disablePlayIcon}
+                  >
+                    <PlayCircleIcon fontSize="large" color="primary" />
+                  </Button>
+                </IconButton>
+              )
             }
           />
           <Image
