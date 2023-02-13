@@ -1,23 +1,34 @@
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
 import Pagination from "@mui/material/Pagination";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Avatar from "@mui/material/Avatar";
 import useReviews from "./hooks/useReviews";
 import { Divider } from "@mui/material";
+import SkeletonGroup from "@/common/components/SkeletonGroup";
 
+interface IResult {
+  author: string;
+  updated_at: string;
+  content: string;
+}
 const Reviews = () => {
+  const [pageToFetch, setPageToFetch] = useState(1);
   const {
     data: reviews,
     isLoading: reviewLoading,
     error: reviewError,
-  } = useReviews();
+  } = useReviews(pageToFetch);
+
+  const onFetchNextPage = (event: ChangeEvent<unknown>, page: number) => {
+    if (page !== pageToFetch) setPageToFetch(page);
+  };
 
   return (
     <div>
       <div style={{ padding: 14 }}>
         <h1>Comments</h1>
-        {reviews?.results?.map((result) => (
+        {reviews?.results?.map((result: IResult) => (
           <Paper
             key={`${result?.author}_${result?.updated_at}`}
             style={{ padding: "40px 20px" }}
@@ -40,7 +51,13 @@ const Reviews = () => {
           </Paper>
         ))}
       </div>
-      <Pagination count={reviews?.total_pages} variant="outlined" color="primary" />
+      {reviewLoading && <SkeletonGroup />}
+      <Pagination
+        count={reviews?.total_pages}
+        variant="outlined"
+        color="primary"
+        onChange={onFetchNextPage}
+      />
     </div>
   );
 };

@@ -1,21 +1,23 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent, SyntheticEvent } from "react";
 import { debounce } from "lodash";
 import useSearch from "./hooks/useSearch";
 import { DEBOUNCE_TIME } from "@/common/helpers/constants";
 import Autocomplete from "@mui/material/Autocomplete";
-import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
 import TextField from "@mui/material/TextField";
 import { useRouter } from "next/router";
 import ErrorBox from "@/common/components/ErrorBox";
 
-const matcher = (option, value) => option.name === value.title;
+const matcher = (
+  option: { title: string; vote_average: string; name: string },
+  value: { title: string; vote_average: string },
+) => option.name === value.title;
 
 const SearchBar = () => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
 
-  const onShowSelect = (e, data) => {
+  const onShowSelect = (e: SyntheticEvent<Element, Event>, data: any) => {
     if (data) router.push(`/details/${data?.media_type}=${data?.id}`);
   };
 
@@ -44,7 +46,7 @@ const SearchBar = () => {
       }}
       onChange={onShowSelect}
       isOptionEqualToValue={matcher}
-      getOptionLabel={(option) => {
+      getOptionLabel={(option: { title: string; vote_average: string }) => {
         return `${option.title} - (Avg: ${option.vote_average})` || "";
       }}
       options={data || []}
@@ -55,7 +57,6 @@ const SearchBar = () => {
             {error && <ErrorBox error={error} />}
             <TextField
               {...params}
-              key={"SDD"}
               onChange={delayedSearch}
               label="Movies and tv shows"
               InputProps={{
