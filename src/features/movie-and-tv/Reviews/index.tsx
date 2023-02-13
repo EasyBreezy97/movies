@@ -12,6 +12,7 @@ interface IResult {
   author: string;
   updated_at: string;
   content: string;
+  author_details: { rating: string };
 }
 const Reviews = () => {
   const [pageToFetch, setPageToFetch] = useState(1);
@@ -29,7 +30,7 @@ const Reviews = () => {
     <div>
       <div style={{ padding: 14 }}>
         <h1>Comments</h1>
-        {!reviewError && !reviews?.length && (
+        {!reviews?.results?.length && !reviewLoading && !reviewError &&  (
           <Alert severity="warning">No comments</Alert>
         )}
         {reviews?.results?.map((result: IResult) => (
@@ -47,7 +48,7 @@ const Reviews = () => {
                 </h4>
                 <p style={{ textAlign: "left" }}>{result?.content}</p>
                 <p style={{ textAlign: "left", color: "gray" }}>
-                  {Date.parse(result?.updated_at)}
+                  Rating: {result?.author_details?.rating}
                 </p>
               </Grid>
             </Grid>
