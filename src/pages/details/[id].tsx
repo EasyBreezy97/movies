@@ -12,6 +12,7 @@ import useTrailer from "@/common/hooks/useTrailer";
 import AppContext from "@/common/contexts/AppContext";
 import Player from "@/common/components/Player";
 import useResourceType from "@/common/hooks/useResourceType";
+import Reviews from "@/features/movie-and-tv/Reviews";
 
 const Details = () => {
   const { setShowPlayer } = useContext(AppContext);
@@ -35,17 +36,15 @@ const Details = () => {
 
   const { data: trailer, setId } = useTrailer(resourceType);
 
-  const {
-    data: cast,
-    isLoading: castLoading,
-    error: castError,
-  } = useActors(resourceId);
+  const { data: cast, isLoading: castLoading, error: castError } = useActors();
 
   const {
     data: similar,
     isLoading: similarLoading,
     error: similarError,
   } = useSimilar(resourceId);
+
+
 
   const finalData = tvData || movieData;
 
@@ -116,6 +115,7 @@ const Details = () => {
         error={castError}
         heading="Cast"
       />
+      <Reviews/>
       <Carousel
         data={similar}
         isLoading={similarLoading}

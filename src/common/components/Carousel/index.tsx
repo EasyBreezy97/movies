@@ -43,7 +43,7 @@ const Carousel = ({
           <Slide
             key={item.id}
             title={item.title ?? item.name}
-            poster={item.poster_path ?? item.profile_path}
+            poster={item.poster_path || item.profile_path}
             rating={roundOnTwoDigits(item.vote_average)}
             onPlayVideo={() => onPlayVideo(item)}
             disablePlayIcon={trailerIsLoading}

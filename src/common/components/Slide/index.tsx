@@ -65,7 +65,7 @@ const Slide: FC<ISlide> = ({
             width={248}
             height={375}
             src={API_IMAGES_URL + poster}
-            alt={poster}
+            alt={poster || "no image"}
             style={{ margin: "auto" }}
           ></Image>
         </div>
