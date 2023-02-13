@@ -10,6 +10,7 @@ const MostPopular = () => {
       error={error}
       isLoading={isLoading}
       heading="Most Popular TV Shows"
+      type="tv"
     />
   );
 };

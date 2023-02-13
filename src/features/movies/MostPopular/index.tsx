@@ -12,6 +12,7 @@ const MostPopular = () => {
         isLoading={isLoading}
         error={error}
         heading="Most Popular Movies"
+        type="movie"
       />
     </div>
   );

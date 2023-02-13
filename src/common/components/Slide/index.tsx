@@ -1,5 +1,5 @@
 import React, { FC, MouseEventHandler } from "react";
-import { API_IMAGES_URL } from "@/common/helpers/constants";
+import { API_IMAGES_URL, SLIDER_SETTINGS } from "@/common/helpers/constants";
 import { styled } from "@mui/material/styles";
 import { Button, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
@@ -7,6 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import Image from "next/image";
+import { cloneDeep } from "lodash";
 
 interface ISlide {
   title: string;
@@ -14,6 +15,7 @@ interface ISlide {
   rating?: number;
   hasPlayIcon?: boolean;
   onPlayVideo?: MouseEventHandler<HTMLButtonElement> | undefined;
+  onNavigateToItem?: MouseEventHandler<HTMLImageElement> | undefined;
   disablePlayIcon?: boolean;
 }
 
@@ -30,8 +32,9 @@ const Slide: FC<ISlide> = ({
   poster,
   rating,
   hasPlayIcon,
-  onPlayVideo,
   disablePlayIcon,
+  onPlayVideo,
+  onNavigateToItem,
 }) => {
   return (
     <Container sx={{ my: 3 }} maxWidth="sm">
@@ -41,6 +44,8 @@ const Slide: FC<ISlide> = ({
       {poster && (
         <div style={{ position: "relative" }}>
           <ImageListItemBar
+            onClick={onNavigateToItem}
+            sx={{ "&:hover": { cursor: "pointer" } }}
             position="bottom"
             title={title}
             subtitle={rating && `Rating: ${rating}`}

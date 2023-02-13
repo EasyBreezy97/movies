@@ -21,7 +21,7 @@ export default function SearchAppBar() {
             variant="h5"
             noWrap
             sx={{
-              display: { xs: "none", sm: "block" },
+              display: { xs: "none", md: "inline" },
             }}
           >
             Movies

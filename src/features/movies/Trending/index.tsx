@@ -5,6 +5,7 @@ import Carousel from "@/common/components/Carousel";
 const Trending = () => {
   const { data, error, isLoading } = useTrendingMovies();
 
+
   return (
     <>
       <Carousel

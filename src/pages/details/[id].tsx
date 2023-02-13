@@ -44,8 +44,6 @@ const Details = () => {
     error: similarError,
   } = useSimilar(resourceId);
 
-
-
   const finalData = tvData || movieData;
 
   const productionCompanies = finalData?.production_companies
@@ -99,7 +97,7 @@ const Details = () => {
         belongsToCollection={finalData?.belongs_to_collection?.name}
         createdBy={createdBy}
         firstAirDate={finalData?.first_air_date}
-        nextEpisodeToAir={finalData?.next_episode_to_air}
+        nextEpisodeToAir={finalData?.next_episode_to_air?.air_date}
         lastAirDate={finalData?.last_air_date}
         numberOfSeasons={finalData?.number_of_seasons}
         numberOfEpisodes={finalData?.number_of_episodes}
@@ -114,13 +112,15 @@ const Details = () => {
         isLoading={castLoading}
         error={castError}
         heading="Cast"
+        slidesToShow={4}
       />
-      <Reviews/>
+      <Reviews />
       <Carousel
         data={similar}
         isLoading={similarLoading}
         error={similarError}
         heading="Similar"
+        slidesToShow={4}
       />
       <Player />
     </Container>
