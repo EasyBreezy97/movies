@@ -3,10 +3,11 @@ import { debounce } from "lodash";
 import useSearch from "./hooks/useSearch";
 import { DEBOUNCE_TIME } from "@/common/helpers/constants";
 import Autocomplete from "@mui/material/Autocomplete";
+import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
 import TextField from "@mui/material/TextField";
 import { useRouter } from "next/router";
-import { v4 as uuidv4 } from "uuid";
+import ErrorBox from "@/common/components/ErrorBox";
 
 const matcher = (option, value) => option.name === value.title;
 
@@ -51,23 +52,26 @@ const SearchBar = () => {
       loading={isLoading}
       renderInput={(params) => {
         return (
-          <TextField
-            {...params}
-            key={"SDD"}
-            onChange={delayedSearch}
-            label="Movies and tv shows"
-            InputProps={{
-              ...params.InputProps,
-              endAdornment: (
-                <React.Fragment>
-                  {isLoading ? (
-                    <CircularProgress color="inherit" size={20} />
-                  ) : null}
-                  {params.InputProps.endAdornment}
-                </React.Fragment>
-              ),
-            }}
-          />
+          <>
+            {error && <ErrorBox error={error} />}
+            <TextField
+              {...params}
+              key={"SDD"}
+              onChange={delayedSearch}
+              label="Movies and tv shows"
+              InputProps={{
+                ...params.InputProps,
+                endAdornment: (
+                  <React.Fragment>
+                    {isLoading ? (
+                      <CircularProgress color="inherit" size={20} />
+                    ) : null}
+                    {params.InputProps.endAdornment}
+                  </React.Fragment>
+                ),
+              }}
+            />
+          </>
         );
       }}
     />

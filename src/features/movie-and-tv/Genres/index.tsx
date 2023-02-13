@@ -1,3 +1,4 @@
+import ErrorBox from "@/common/components/ErrorBox";
 import Carousel from "@/features/movie-and-tv/Genres/components/Carousel";
 import React from "react";
 import useGenres from "./hooks/useGenres";
@@ -12,6 +13,7 @@ const Genres = () => {
         error={error}
         heading="Genres"
       />
+      {error && <ErrorBox error={error} />}
     </div>
   );
 };

@@ -8,6 +8,7 @@ import { roundOnTwoDigits } from "@/common/helpers/utils";
 import useTrailer from "@/common/hooks/useTrailer";
 import AppContext from "@/common/contexts/AppContext";
 import { useRouter } from "next/router";
+import ErrorBox from "../ErrorBox";
 
 const Carousel = ({
   data,
@@ -47,13 +48,13 @@ const Carousel = ({
     }
   };
 
-  if (!data) return;
-
   return (
     <div>
       <Typography sx={{ m: 1 }} variant="h4">
         {heading}
       </Typography>
+      {error && <ErrorBox error={error} />}
+
       {isLoading && <SkeletonGroup />}
       <Slider {...sliderSettings}>
         {data?.map((item) => (

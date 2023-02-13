@@ -4,15 +4,14 @@ import useMovieDetails from "@/features/movies/hooks/useDetails";
 import useTVShowDetails from "@/features/tv-shows/hooks/useDetails";
 import useFetchDetails from "@/common/hooks/useFetchDetails";
 import { usdFormatter } from "@/common/helpers/usd-formatter";
-import useActors from "@/features/movie-and-tv/Actors/hooks/useActors";
-import Carousel from "@/common/components/Carousel";
 import Container from "@mui/material/Container";
-import useSimilar from "@/features/movie-and-tv/Similar/hooks/useSimilar";
 import useTrailer from "@/common/hooks/useTrailer";
 import AppContext from "@/common/contexts/AppContext";
 import Player from "@/common/components/Player";
 import useResourceType from "@/common/hooks/useResourceType";
 import Reviews from "@/features/movie-and-tv/Reviews";
+import Actors from "@/features/movie-and-tv/Actors";
+import Similar from "@/features/movie-and-tv/Similar";
 
 const Details = () => {
   const { setShowPlayer } = useContext(AppContext);
@@ -20,8 +19,6 @@ const Details = () => {
   const { shouldFetchMovies, shouldFetchTV, resourceId } = useFetchDetails();
 
   const { resourceType } = useResourceType();
-
-  console.log({ resourceType });
 
   const {
     data: movieData,
@@ -34,15 +31,7 @@ const Details = () => {
     isLoading: tvLoading,
   } = useTVShowDetails(resourceId, shouldFetchTV);
 
-  const { data: trailer, setId } = useTrailer(resourceType);
-
-  const { data: cast, isLoading: castLoading, error: castError } = useActors();
-
-  const {
-    data: similar,
-    isLoading: similarLoading,
-    error: similarError,
-  } = useSimilar(resourceId);
+  const { setId } = useTrailer(resourceType);
 
   const finalData = tvData || movieData;
 
@@ -107,21 +96,9 @@ const Details = () => {
         type={finalData?.type}
         onPlayTrailer={onPlayTrailer}
       />
-      <Carousel
-        data={cast}
-        isLoading={castLoading}
-        error={castError}
-        heading="Cast"
-        slidesToShow={4}
-      />
+      <Actors />
       <Reviews />
-      <Carousel
-        data={similar}
-        isLoading={similarLoading}
-        error={similarError}
-        heading="Similar"
-        slidesToShow={4}
-      />
+      <Similar />
       <Player />
     </Container>
   );

@@ -12,7 +12,7 @@ interface IAppContext {
   setShowPlayer: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const AppContext = createContext<IAppContext | null>(null);
+const AppContext = createContext<IAppContext>({} as IAppContext);
 
 export const AppContextProvider = ({ children }: IProps) => {
   const [url, setUrl] = useState("");
