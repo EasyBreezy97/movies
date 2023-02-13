@@ -33,8 +33,8 @@ const Details = () => {
   const genres = finalData?.genres?.map((item) => item.name)?.join(",");
 
   const langs = finalData?.languages?.join(" ");
-  const budget = usdFormatter.format(finalData?.budget);
-  const revenue = usdFormatter.format(finalData?.revenue);
+  const budget = finalData?.budget && usdFormatter.format(finalData?.budget);
+  const revenue = finalData?.revenue && usdFormatter.format(finalData?.revenue);
 
   return (
     <div>
