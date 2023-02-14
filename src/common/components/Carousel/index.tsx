@@ -46,12 +46,7 @@ const Carousel: FC<ICarousel> = ({
     ? { ...SLIDER_SETTINGS, slidesToShow }
     : { ...SLIDER_SETTINGS };
 
-  const {
-    data: trailer,
-    error: trailerError,
-    isLoading: trailerIsLoading,
-    setId,
-  } = useTrailer(type);
+  const { isLoading: trailerIsLoading, setId } = useTrailer(type);
 
   const onPlayVideo = (e: MouseEvent<HTMLElement>, item: ICarouselItem) => {
     e.stopPropagation();

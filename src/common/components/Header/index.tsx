@@ -9,12 +9,6 @@ import {
 import SearchBar from "@/features/movie-and-tv/SearchBar";
 import { useRouter } from "next/router";
 
-const containerStyle = {
-  display: "grid",
-  gridTemplateColumns: "5fr auto",
-  alignItems: "center",
-  width: "100%",
-};
 const Header = () => {
   const router = useRouter();
 
@@ -29,7 +23,7 @@ const Header = () => {
             <Heading variant="caption" noWrap>
               Movies
             </Heading>
-            <SearchBar />
+            {router.pathname === "/" && <SearchBar />}
           </ContentWrapper>
         </Toolbar>
       </NavBar>

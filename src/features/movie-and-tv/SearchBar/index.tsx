@@ -10,15 +10,15 @@ import ErrorBox from "@/common/components/ErrorBox";
 
 const matcher = (
   option: { title: string; vote_average: string; name: string },
-  value: { title: string; vote_average: string },
-) => option.name === value.title;
+  value: { title: string; vote_average: string; name: string },
+) => option.name === value.title || option.name === value.name;
 
 const SearchBar = () => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
 
   const onShowSelect = (e: SyntheticEvent<Element, Event>, data: any) => {
-    if (data) router.push(`/details/${data?.media_type}=${data?.id}`);
+    router.push(`/details/${data?.media_type}=${data?.id}`);
   };
 
   const { data, error, isLoading, setQueryParams } = useSearch();
@@ -51,10 +51,9 @@ const SearchBar = () => {
         name: string;
         vote_average: string;
       }) => {
-        return (
-          `${option?.title || option?.name} - (Avg: ${option.vote_average})` ||
-          ""
-        );
+        return `${option?.title || option?.name} - (Avg: ${
+          option.vote_average
+        }) `;
       }}
       options={data || []}
       loading={isLoading}
