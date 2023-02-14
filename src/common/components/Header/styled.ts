@@ -12,6 +12,18 @@ export const Heading = styled(Typography)(() => ({
   flexGrow: 1,
   textTransform: "uppercase",
   color: "rgb(229, 9, 20)",
-  fontWeight: "bold",
-  pointerEvents: "none",
+  fontWeight:"normal",
+  fontSize:"25px",
+  cursor:"pointer"
+}));
+
+export const ContentWrapper = styled("div")(() => ({
+  display: "grid",
+  gridTemplateColumns: "5fr auto",
+  alignItems: "center",
+  width: "100%",
+  "@media (max-width: 900px)": {
+    display: "flex",
+    flexDirection: "column",
+  },
 }));

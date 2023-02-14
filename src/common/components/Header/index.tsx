@@ -1,34 +1,40 @@
-import * as React from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import { NavBar, Heading } from "@/common/components/Header/styled";
+import {
+  NavBar,
+  Heading,
+  ContentWrapper,
+} from "@/common/components/Header/styled";
 import SearchBar from "@/features/movie-and-tv/SearchBar";
+import { useRouter } from "next/router";
 
-export default function SearchAppBar() {
+const containerStyle = {
+  display: "grid",
+  gridTemplateColumns: "5fr auto",
+  alignItems: "center",
+  width: "100%",
+};
+const Header = () => {
+  const router = useRouter();
+
+  const onClick = () => {
+    router.push("/");
+  };
   return (
     <Box sx={{ flexGrow: 1 }}>
       <NavBar>
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          ></IconButton>
-          <Heading
-            variant="h5"
-            noWrap
-            sx={{
-              display: { xs: "none", md: "inline" },
-            }}
-          >
-            Movies
-          </Heading>
-          <SearchBar />
+          <ContentWrapper onClick={onClick}>
+            <Heading variant="caption" noWrap>
+              Movies
+            </Heading>
+            <SearchBar />
+          </ContentWrapper>
         </Toolbar>
       </NavBar>
     </Box>
   );
-}
+};
+
+export default Header;
