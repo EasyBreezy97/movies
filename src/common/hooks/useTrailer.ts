@@ -24,6 +24,9 @@ export default function useTrailer(show: string) {
     setUrl(trailer?.key);
     setVideoProvider(trailer?.site);
   }
+  if (isLoading) {
+    setUrl("");
+  }
 
   return { data: trailer, error, isLoading, setId };
 }
